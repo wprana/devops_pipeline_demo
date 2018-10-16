@@ -1,1 +1,3 @@
-Hello Edureka...Welcome to the session
+Hello BNI Developer Team...
+Welcome to the VMWARE - Tech Data - MII Workshop session
+Enjoy the basic and simple CI/CD example
