@@ -1,11 +1,9 @@
 pipeline {
   agent any
   stages {
-    stage('Build') {
-      parallel {
-        stage('Build') {
-          steps {
-            sh '''#!/bin/bash
+    stage('Integration') {
+      steps {
+        sh '''#!/bin/bash
 
 echo "*******-Starting CI CD Pipeline Tasks-*******"
 
@@ -13,20 +11,17 @@ echo "*******-Starting CI CD Pipeline Tasks-*******"
 echo ""
 echo "..... Build Phase Started :: Compiling Source Code :: ....."
 cd java_web_code
-mvn install'''
-          }
-        }
-        stage('Test') {
-          steps {
-            sh '''#!/bin/bash #-BUILD (TEST)
+mvn install
+
+#-BUILD (TEST)
 echo ""
 echo "..... Test Phase Started :: Testing via Automated Scripts :: ....."
-cd java_web_code mvn clean verify -P integration-test'''
-          }
-        }
-        stage('cotainer') {
-          steps {
-            sh '''#!/bin/bash
+mvn clean verify -P integration-test'''
+      }
+    }
+    stage('Delivery') {
+      steps {
+        sh '''#!/bin/bash
 #-POSTBUILD (PROVISIONING DEPLOYMENT)
 echo ""
 echo "..... Integration Phase Started :: Copying Artifacts :: ....."
@@ -36,11 +31,9 @@ echo ""
 echo "..... Provisioning Phase Started :: Building Docker Container :: ....."
 cd ../docker/
 sudo docker build -t devops_pipeline_demo .'''
-          }
-        }
       }
     }
-    stage('Deploy') {
+    stage('Deployment') {
       steps {
         sh '''#!/bin/bash
 #-DELIVERY (APPS DEPLOYMENT)
