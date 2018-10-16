@@ -21,7 +21,7 @@ mvn install'''
             sh '''#!/bin/bash #-BUILD (TEST)
 echo ""
 echo "..... Test Phase Started :: Testing via Automated Scripts :: ....."
-mvn clean verify -P integration-test'''
+cd java_web_code mvn clean verify -P integration-test'''
           }
         }
         stage('cotainer') {
