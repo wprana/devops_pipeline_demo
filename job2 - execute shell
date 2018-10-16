@@ -1,0 +1,10 @@
+#!/bin/bash
+#-POSTBUILD (PROVISIONING DEPLOYMENT)
+echo ""
+echo "..... Integration Phase Started :: Copying Artifacts :: ....."
+cd java_web_code
+/bin/cp target/wildfly-spring-boot-sample-1.0.0.war ../docker/
+echo ""
+echo "..... Provisioning Phase Started :: Building Docker Container :: ....."
+cd ../docker/
+sudo docker build -t devops_pipeline_demo .
